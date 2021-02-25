@@ -44,6 +44,32 @@ int count_words(char *str){
   return count;
 }
 
+char *copy_str(char *inStr, short len){
+  char *copy = malloc(sizeof(char) * (len + 1)); //FINDS FREE MEMORY TO STORE
+  for(int i = 0; i < len; i++){
+    *copy++ = *inStr++;
+  }
+  *copy = '\0';
+  copy = copy - len;
+  return copy;		      
+}
+
+char **tokenize(char* str){
+  int len = count_words(str);
+  char **array = (char**) malloc(sizeof(char*) * (len + 1));
+  char *strT;
+  int wordLen;
+  for(int i = 0; i < len; i++){
+    str = word_start(str);
+    strT = word_terminator(str);
+    wordLen = strT - str;
+    array[i] = copy_str(str, wordLen);
+    str = strT;
+  }
+  array[len] = '\0';
+  return array;
+}
+
 void main(){
   char c = ' ';
   char d = 'f';
@@ -51,4 +77,11 @@ void main(){
   printf(space_char(c) ? "True\n":"False\n"); //True
   printf(non_space_char(d) ? "True\n":"False\n"); //True
   printf(non_space_char(c) ? "True\n":"False\n"); //False
+  char word[] = " Rata Sucia";
+  char *ptr = &word[0];
+  printf("%s\n",word_start(ptr));
+  printf("%s\n",word_terminator(ptr));
+  printf("%i\n",count_words(ptr));
+  printf("%p\n",ptr);
+  printf("%p\n",copy_str(ptr,11));
 }
