@@ -70,7 +70,20 @@ char **tokenize(char* str){
   return array;
 }
 
-void main(){
+void print_tokens(char **tokens){
+  for(; *tokens != 0; ++tokens){
+    printf("\t->%s\n", *tokens);
+  }
+}
+
+void free_tokens(char **tokens){
+  for(int i = 0; tokens[i] != 0; i++){
+    free(tokens[i]);
+  }
+  free(tokens);
+}
+
+/*void main(){
   char c = ' ';
   char d = 'f';
   printf(space_char(d) ? "True\n":"False\n"); //False
@@ -84,4 +97,4 @@ void main(){
   printf("%i\n",count_words(ptr));
   printf("%p\n",ptr);
   printf("%p\n",copy_str(ptr,11));
-}
+}*/
