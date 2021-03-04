@@ -14,6 +14,7 @@ char *word_start(char *str){
   while(space_char(*word)){
     word++;
   }
+  return word;
 }
 
 char *word_terminator(char *word){
